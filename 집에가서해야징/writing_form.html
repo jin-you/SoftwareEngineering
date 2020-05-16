@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+	var stepcount = 0;
+	var receipe = new Array();
+	/*
+	 $(function() {
+        $("#add_step_btn").on("click", function() {
+            $("#step").append("<input type='text' placeholder='Text input'>");
+        });
+    });
+	*/
+	window.onload=function(){
+		document.getElementById("submit").onclick=makeData;
+	}
+	
+	function makeData(){
+		
+		var i;
+		var tmp_obj;
+		var tmp_id;
+		for(i = 0; i<stepcount; i++){
+			tmp_id = "step_text" + i;
+			tmp_obj = document.getElementById(tmp_id);
+			receipe[i] = tmp_obj.value.split("\n");
+		}
+		alert(receipe);
+	}
+	
+	function addStep(current){
+		var new_obj;
+		var tmp_id;
+		var text;
+		var tmp;
+		var before_obj;
+		var list_obj;
+		var list_el;
+		var del_btn;
+		var del_txt_node;
+
+		tmp = "Step " + (stepcount + 1);
+		tmp_id = "step_text" + stepcount;
+		
+		new_obj = document.createElement('input');
+		new_obj.setAttribute('id', tmp_id);
+		new_obj.setAttribute('type', 'text');
+		new_obj.setAttribute('placeholder', tmp);
+		
+		del_btn = document.createElement('button');
+		del_btn.setAttribute('class', 'btn btn-danger btn-space');
+		del_btn.setAttribute('id',  stepcount);
+		del_btn.setAttribute('onclick', 'deleteStep(id)');
+		del_txt_node = document.createTextNode('취소');
+		del_btn.appendChild(del_txt_node);
+
+		before_obj = document.getElementById("step");
+		list_obj = document.getElementById("step_list");
+		list_el = document.createElement('ul');
+		list_el.appendChild(new_obj);
+		list_el.appendChild(del_btn);
+		list_obj.appendChild(list_el);
+	
+		stepcount++;
+		
+		
+	}
+	
+	function deleteStep(current){
+		var tmp_obj = "step_text" + current;
+		tmp_obj = document.getElementById(current);
+		alert(tmp_obj);
+	}
+</script>
+
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div class="container" style="width:50%;">
+	
+		<div style="width:100%;">
+		<img src="default.jpg" alt="..." class="img-thumbnail">
+		</div>
+		<hr>		
+	
+	<div class="container" style="width:250px;">
+		<textarea cols="20" rows="5">음식 재료, 소요시간 필요</textarea>
+	</div>
+	<div class="row" id="food_info">
+		<hr>
+	</div>
+	<div class="row" id="step">
+		조리법, step누를때마다 단계 추가, 삭제버튼도 필요<br>
+		<ul id="step_list">
+			
+		</ul>
+		
+	</div>
+	<div class="container" style="width:35%;">
+	<button type="button" id="add_step_btn" style="height:50px" class="btn btn-primary btn-lg btn-block" onclick="addStep(this.id)">요리 과정 추가</button>
+	</div>	
+		
+	
+
+		<br>
+		<div class="container" style="width:35%; background-color: #eee;">
+			<button type="button" id="submit" class="btn btn-success btn-lg btn-block" style="height:50px">레시피 올리기</button>
+		</div>
+	
+	</div>
+	
+
+	<!--자바 스크립트 파일은 body 끝나는 가장 마지막 부분에 넣어줘야함.
+	제이쿼리 먼저 인클루드하고 부트스트랩 인클루드해야함
+	부트스트랩이 제이쿼리 기반으로 만들어졌기 때문-->
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
