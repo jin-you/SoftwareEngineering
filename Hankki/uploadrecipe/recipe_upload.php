@@ -1,10 +1,9 @@
 <?php
-ini_set('display_errors', '0');
 
   session_start();
   require_once("../lib/MYDB.php");
   $pdo = db_connect();
-  $ID = $_SESSION['userid'];
+  $ID = $_SESSION['ID'];
   
   //header('Content-Type: text/html; charset=UTF-8');
 
@@ -12,117 +11,39 @@ ini_set('display_errors', '0');
     $content = $_POST['content'];
     $time = $_POST['content'];
     $type = $_POST['type'];
+	$price = $_POST['price'];
     $ingredient = $_POST['ingredient'];
     
-    $sql = "insert into Recipe(title,type,content,userID,time,ingredients)
+    $sql = "insert into Recipe(title,type,price,content,cookTime,ingredients,userID);
     
     
     
     
-    
-    
-    
-    
-    if($row = mysqli_fetch_row(
- if(isset($_POST['patient'])){ 
-  
-  $ID = $_POST['ID'];//99
- $PW = $_POST['PW'];//99
-  
-  if($ID == "" || $PW == ""){?>
-    <script> alert("type ID or PW"); history.back();</script><?php
-	}
-  else{
-    
-    $sql = "select * from patient_info where ID='" . $ID . "';";
-    $result = $link->query($sql);
-    
-		if(mysqli_num_rows($result)){
-      $row = mysqli_fetch_assoc($result);
-      
-      //비밀번호가 맞다면 세션 생성
-                if($row['Pw']==$PW){
-                        $_SESSION['userid']=$ID;//세션에 ID 저장
-                        if(isset($_SESSION['userid'])){
-                        ?>      <script>
-                                        alert("login success");
-                                        location.replace("P_login.html");
-                                </script>
-<?php
-                        }
-                        else{
-                                echo "session fail";
-                        }
-                }
+     
+ try{
+
+$pdo->beginTransaction();
+$sql = "insert into phptest.Recipe VALUES(:title, :type, :price, :content, :cookTime, :ingredient, :userID)";
+ $stmh = $pdo->prepare($sql);
+ $stmh->bindValue(":title", $title, PDO::PARAM_STR); 
+ $stmh->bindValue(":type", $type, PDO::PARAM_STR);
+ $stmh->bindValue(":price", $price, PDO::PARAM_INT);
+ $stmh->bindValue(":content", $content, PDO::PARAM_STR);
+ $stmh->bindValue(":cookTime", $time, PDO::PARAM_INT);
+ $stmh->bindValue(":ingredient",$ingredient,PDO::PARAM_STR);
+ $stmh->bindValue(":userID",$ID,PDO::PARAM_STR);
+ $stmh->execute();
+ $pdo->commit();
+
+print "<script language=javascript> alert('레시피 등록을 완료하였습니다!'); location.replace('http://localhost/Hankki/index.php'); </script>";
  
-                else {
-        ?>              <script>
-                                alert("Invalid ID and password");
-                                history.back();
-                        </script>
-        <?php
-                }
  
-        }
  
-                else{
-?>              <script>
-                        alert("Invalid ID and password");
-                        history.back();
-                </script>
-<?php
-                }
- 
-  }
+
+ } catch (PDOException $Exception) {
+ $pdo->rollBack();
+ print "오류: ".$Exception->getMessage();
  }
- else if(isset($_POST['doctor'])){ 
-  
-  $ID = $_POST['ID'];//99
-  $PW = $_POST['PW'];//99
-  if($ID == "" || $PW == ""){?>
-    <script> alert("type ID or PW"); history.back();</script><?php
-	}
-  else{
     
-    $sql = "select * from doctor_info where ID='" . $ID . "';";
-    $result = $link->query($sql);
     
-	if(mysqli_num_rows($result)){
-		$row = mysqli_fetch_assoc($result);
-      
-				//비밀번호가 맞다면 세션 생성
-        if($row['Pw']==$PW){
-			$_SESSION['userid']=$ID;//세션에 ID 저장
-            if(isset($_SESSION['userid'])){ //ID 저장했어 ? 구럼 비번 맞단거자나
-            ?>      <script>
-                        alert("login success");
-                        location.replace("D_login.html");
-                    </script>
-<?php
-                        }
-                        else{
-                                echo "session fail";
-                        }
-                }
- 
-                else {
-        ?>              <script>
-                                alert("Invalid ID and password");
-                                history.back();
-                        </script>
-        <?php
-                }
- 
-        }
- 
-                else{
-?>              <script>
-                        alert("Invalid ID and password");
-                        history.back();
-                </script>
-<?php
-                }
- 
-  }
- }
 ?>
