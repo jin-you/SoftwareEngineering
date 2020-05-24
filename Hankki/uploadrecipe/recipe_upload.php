@@ -11,7 +11,7 @@
     $content = $_POST['content'];
     $time = $_POST['content'];
     $type = $_POST['type'];
-	$price = $_POST['price'];
+    $price = $_POST['price'];
     $ingredient = $_POST['ingredient'];
     
     $sql = "insert into Recipe(title,type,price,content,cookTime,ingredients,userID);
