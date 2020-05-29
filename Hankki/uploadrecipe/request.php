@@ -4,7 +4,10 @@
 <body>
 	
 	<?php
-	
+	/***********************************************************************************
+	 * 주의) 배열 데이터 step의 index는 1부터 시작하도록 해놨습니다.
+	 * 
+	 ***********************************************************************************/
 		class Receipe{
 			private $food_name;//one string data
 			private $food_ingredients;//one string data
@@ -13,6 +16,8 @@
 			private $taget_dir = "uploads/";//directory to store image file
 			private $thumbnail_src;
 			private $step_count;
+			private $price;
+			private $consumed_time;
 			//private $target_file = $taget_dir.basename($_FILES["fileToUpload"]["name"]);
 			//$uploadcheck = 1;
 			//$imageFileType = pathinfo($taget_file, PATHINFO_EXTENSION);
@@ -20,9 +25,11 @@
 			public function __construct(){
 			
 			}
-			public function setInfo($food_name, $food_ingredients){
+			public function setInfo($food_name, $food_ingredients, $price, $consumed_time){
 				$this->food_name = $food_name;
 				$this->food_ingredients = $food_ingredients;
+				$this->price = $price;
+				$this->consumed_time = $consumed_time;
 				
 				if(isset($_POST["food_type"]) && $_POST["food_type"] == true)$this->food_type = $_POST["food_type"];
 				//요리 종류 필수 체크는 프론트에서 막을수도 있음.
@@ -30,18 +37,19 @@
 				
 				$this->step = array();
 				$i = 1;
+				$real_index = 1;
 				while($i < 11){
 					$step_id = "Step".$i;
 					
 					
 					if(isset($_POST[$step_id]) && $_POST[$step_id] == true){
-						$this->step[$i] = $_POST[$step_id];
-						echo $this->step[$i]."<br>";
+						$this->step[$real_index] = $_POST[$step_id];
+						$real_index++;						
 					}
 					$i++;
 				}
 				
-
+				$this->step_count = count($this->step);
 			}
 
 			public function showInfo(){
@@ -50,17 +58,18 @@
 				echo "음식 이름 : ".$this->food_name."<br>";
 	
 				echo "음식 재료 : ".$this->food_ingredients."<br>";
+				echo "소요 시간 : ".$this->consumed_time."<br>";
+				echo "가격 : ".$this->price."<br>";
 				if(isset($this->food_type))
 					echo "음식 종류 : ".$this->food_type."<br>";
 				echo "요리 단계는 총 ".$this->step_count." 단계인 레시피<br>";
-				/*
-				for($i = 1; $i < count($this->step); $i++){
-					if(empty($this->step[$i]))break;
+				
+				for($i = 1; $i <= count($this->step); $i++){
 					echo "단계".$i.": ".$this->step[$i]."<br>";
 					
 				}
-				 */
-				echo count($this->step);
+				 
+				
 				 
 			}
 			
@@ -93,7 +102,7 @@
 		}
 		
 		$newReceipe = new Receipe();
-		$newReceipe->setInfo($_POST["food_name"], $_POST["food_ingredients"]);
+		$newReceipe->setInfo($_POST["food_name"], $_POST["food_ingredients"], $_POST["price"], $_POST["time"]);
 		$newReceipe->showInfo();
 		//$newReceipe->uploadthumbnail();
 		

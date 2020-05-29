@@ -54,7 +54,6 @@
 		new_obj.setAttribute('class', 'form-control');
 		new_obj.setAttribute('id', tmp);
 		new_obj.setAttribute('rows', '3');
-		new_obj.setAttribute('placeholder', tmp);
 
 		del_btn = document.createElement('button');
 		del_btn.setAttribute('class', 'btn btn-danger btn-space');
@@ -108,6 +107,29 @@
 				<textarea class="form-control" name="food_ingredients" rows="5">음식 재료, 소요시간 필요</textarea>
 			</div>
 			<hr>
+			<div class="container" style="width:50%;">				
+				소요 시간<br/>
+				<input type = 'radio' name = 'time' value= '5'/> 10분 미만
+				<input type = 'radio' name = 'time' value= '20'/> 10분~30분
+
+				<input type = 'radio' name = 'time' value= '45'/> 30분~1시간
+				<input type = 'radio' name = 'time' value= '100'/> 1시간 이상
+				<br/><br/>
+			</div>
+			<hr>
+			
+			<div class="container" style="width:50%;">
+				가격대<br/>
+				<input type = 'radio' name = 'price' value= '5000'/> 만원 미만
+				<input type = 'radio' name = 'price' value= '15000'/> 만원~2만원
+
+				<input type = 'radio' name = 'price' value= '25000'/> 2만원~3만원
+				<input type = 'radio' name = 'price' value= '50000'/> 3만원 이상
+				<br/><br/>
+			</div>
+			<hr>
+			
+		
 		
 			<div class="row text-center" style="width:100%">
 				<div style="float:none; margin:0 auto">
