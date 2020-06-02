@@ -222,6 +222,34 @@ if($link === false){
 		text-decoration: none;
 		padding: .2em 1em;
 	}
+	
+		*{margin:0; padding:0;}
+	.star{
+	  display:inline-block;
+	  width: 30px;height: 60px;
+	  cursor: pointer;
+	}
+	.star_left{
+	  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat 0 0; 
+	  background-size: 60px; 
+	  margin-right: -3px;
+	}
+	.star_right{
+	  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat -30px 0; 
+	  background-size: 60px; 
+	  margin-left: -3px;
+	}
+	.star.on{
+	  background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
+	}
+	
+	#star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }	
 						
 	</style>
 	
@@ -280,8 +308,18 @@ if($link === false){
                     작성일 : <?php echo $item_date?>
                 </div>
                 <div>
-					작성자 : <?php echo $item_nick?>
-				</div>
+			작성자 : <?php echo $item_nick?>
+		</div>
+		<div align = "right">
+			<p id="star_grade">
+				 별점 입력하기 : 
+				<a href="#">★</a>
+				<a href="#">★</a>
+				<a href="#">★</a>
+				<a href="#">★</a>
+				<a href="#">★</a>
+			</p>
+		</div>			
 			
               </div>
 			  
@@ -381,6 +419,23 @@ if($link === false){
 			play();
         }
     }
+	
+		
+	$('#star_grade a').click(function(){
+		$(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+		$(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+		var idx = $(this).index()+1;
+
+		$.ajax({
+			url:"reviewed.php",
+			type:"GET",
+			data:{'idx':idx,'id':<?php echo $id?>},
+			dataType:"json",
+		});
+
+		return false;
+	});
+
 
 </script>
 
