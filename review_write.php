@@ -1,6 +1,11 @@
 <?php
+
 session_start();
+
+
  ?>
+
+
  <!DOCTYPE HTML>
  <html>
   <head>
@@ -37,33 +42,28 @@ session_start();
 
 <body>
     <form name="board_form" method="get" action="review_upload.php" enctype="multipart/form-data">
-    <div id = "jb-container">
-		<div id = 'jb-header'>
 
 <div class="container">
+
 <form>
   <div class="form-group">
 
-
   <div class="form-group"> <br><Br>
     <label for="exampleInputEmail1">글 제목</label><Br>
-    <input type="text" class="form-control" name = title placeholder="title">
+    <input type="text" class="form-control" name = title placeholder="title" required>
   </div>
 
     <div class="form-group">
       <label for="exampleInputEmail1">작성자</label><Br>
-      <input type="text" class="form-control" name = name placeholder=<?=$_SESSION["NICKNAME"]?>>
+      <input type="text" class="form-control" name = id placeholder=<?=$_SESSION["ID"]?>>
     </div>
 
     <div class="form-group">
       <label for="exampleInputPassword1">글 내용</label> <Br>
-      <textarea class="form-control" rows="10" id="comment" placeholder="contents"></textarea>
+      <textarea class="form-control" rows="10" id="comment" name = content placeholder="contents" required></textarea>
     </div>
 
-    <div class="form-group">
-      <label for="exampleInputEmail1">비밀번호</label><Br>
-      <input type = password class="form-control" name = pw size=10 maxlength=10  placeholder="password">
-    </div>
+
   </div>
 		<hr>
   </form>
@@ -73,8 +73,6 @@ session_start();
 									<button type="button" onclick="location.href='review_list.php'" class="btn btn-outline-primary btn-lg">목록으로</button>
 								</div>
 						</div>
-					</div>
-          </div>
         </form>
             <script src="../js/jquery-3.3.1.min.js"></script>
             <script src="../js/bootstrap.min.js"></script>

@@ -10,7 +10,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><center><b>자유 게시판</b></center></title>
+    <title>자유 게시판</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,7 +73,7 @@
                     <td width = "130" align = "center">
                     <a href = "view.php?number=<?php echo $rows['number']?>">
                     <?php echo $rows['title']?></td>
-                      <td width = "40" align = "center"><?php echo $rows['id']?></td>
+                      <td width = "40" align = "center"><?php echo $_SESSION["ID"]?></td>
                     <td width = "80" align = "center"><?php echo $rows['date']?></td>
                     <td width = "20" align = "center"><?php echo $rows['hit']?></td>
                     </tr>

@@ -1,16 +1,15 @@
  <meta charset="utf-8">
 <?php
     $connect= mysqli_connect("localhost", "whalsrl5650", "whalsrl5650!", "whalsrl5650") or die("fail");
-    $id = $_GET[name];   //작성자
     $pw = $_GET[pw];                        //Password
     $title = $_GET[title];                  //Title
-    $content = $_GET[content];              //Content
+    $content = $_GET[content];         //Content
     $date = date('Y-m-d H:i:s');            //Date
 
     $URL = './review_list.php';                   //return URL
 
     $query = "insert into whalsrl5650.Freeboard(number,title, content, date, hit, id, password)
-                          values(null,'$title', '$content', '$date',0, '$id', '$pw')";
+                          values(null,'$title', '$content', '$date',0 , '$id', '$pw')";
 
 
                   $result = $connect->query($query);

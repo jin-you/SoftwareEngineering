@@ -1,11 +1,13 @@
 <?php
-                $connect= mysqli_connect("localhost", "whalsrl5650", "whalsrl5650!", "whalsrl5650") or die("fail");
-                $number = $_GET['number'];
-                session_start();
-                $query = "select title, content, date, hit, id from board where number =$number";
-                $result = $connect->query($query);
-                $rows = mysqli_fetch_assoc($result);
-        ?>
+      $connect= mysqli_connect("localhost", "whalsrl5650", "whalsrl5650!", "whalsrl5650") or die("fail");
+      $number = $_REQUEST["number"];
+      session_start();
+      $query = "select * from whalsrl5650.Freeboard where number =$number";
+      $result = $connect->query($query);
+      $rows = mysqli_fetch_assoc($result);
+      $hit = "update  whalsrl5650.Freeboard set hit=hit+1 where number=$number";  // 조회수 증가
+      $connect->query($hit);
+?>
 
   <!DOCTYPE html>
   <html>
@@ -24,7 +26,7 @@
     height: 30px;
     text-align: center;
     background-color: #cccccc;
-    color: white;
+    color: black;
     width: 1000px;
     }
     .view_id {
@@ -92,38 +94,45 @@
 
         <table class="view_table" align=center>
         <tr>
-                <td colspan="4" class="view_title"><?php echo $rows['title']?></td>
+                <td colspan="4" class="view_title"><b><?php echo $rows['title']?></b></td>
         </tr>
 
-        $hit = "update board set hit=hit+1 where number=$number";  // 조회수 증가 ?????
-        $connect->query($hit);
+
 
 
         <tr>
                 <td class="view_id">작성자</td>
-                <td class="view_id2"><?php echo $rows['id']?></td>
+                <td class="view_id2">&nbsp;&nbsp;<?php echo $rows['ID']?></td></td>
                 <td class="view_hit">조회수</td>
-                <td class="view_hit2"><?php echo $rows['hit']?></td>
+                <td class="view_hit2">&nbsp;&nbsp; <?php echo $rows['hit']?></td>
         </tr>
 
 
         <tr>
                 <td colspan="4" class="view_content" valign="top">
-                <?php echo $rows['content']?></td>
+                 <?php  echo $rows['content'] ?></td>
         </tr>
         </table>
 
-        <br><br>
 
 
+     <div class = "view_btn">
       <div align="center">
-        <button type="button" onclick="location.href='review_list.php'" class="btn btn-outline-primary btn-lg">목록으로</button>
-        <button type="button" onclick="location.href='!!!!!!!수정파일!!!!!!!.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'" class="btn btn-outline-primary btn-lg">수정</button>
-        <button type="button" onclick="location.href='!!!!!!삭제파일!!!!!!!!.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'" class="btn btn-outline-primary btn-lg">삭제</button>
-      </div>
+        <button class = "view_btn1" type="button" onclick="location.href='review_list.php'">목록으로</button>
 
+        <?php
+        if(isset($_SESSION["ID"])){
+      ?>
+      <button class = "view_btn1" type="button" onclick="location.href='review_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
+    </div>
+    </div>
+
+      <?php
+      }
+      ?>
 
     </div>
+
   </body>
 
   </html>
