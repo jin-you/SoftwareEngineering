@@ -11,16 +11,22 @@
                             <p>대한민국 NO.1 요리레시피</p>
                         </div>
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="Recipe...">
+                            <form action="./search/search_data.php" method="post">
+                                 <input type="text" name="recipe_name" placeholder="Recipe...">
                                 <div class="select__option">
-                                    <select>
+                                    <select name="cate">
                                         <option value="">음식 카테고리</option>
+										<option value="양식">양식</option>
+										<option value="한식">한식</option>
+										<option value="일식">일식</option>
                                     </select>
                                 </div>
-                                  <div class="select__option">
-                                    <select>
-                                        <option value="3">가격대</option>
+                                <div class="select__option">
+                                    <select name="cost">
+                                        <option value="">가격대</option>
+										<option value="5000">5000원 이하</option>
+										<option value="10000">10000원 이하</option>
+										<option value="*">만원 이상</option>
                                     </select>
                                 </div>
                             
