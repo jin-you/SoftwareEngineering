@@ -1,7 +1,7 @@
 <?php
 
 $connect = mysqli_connect("localhost", "whalsrl5650", "whalsrl5650!", "whalsrl5650") or die("connect fail");
-$ID = $_GET[ID];
+$id = $_GET[id];
 $number = $_GET[number];
 
 $query = "select title, content, date, id from whalsrl5650.Freeboard where number=$number";
@@ -11,14 +11,14 @@ $rows = mysqli_fetch_assoc($result);
 
 $title = $rows['title'];
 $content = $rows['content'];
-$id = $rows['ID'];
+$usrid = $rows['id'];
 
 session_start();
 
 $URL = './review_list.php';
 
 
-    if($_SESSION["ID"]==$id)  { 
+   if($_SESSION['ID']==$usrid)  {
 
 ?>
 
@@ -67,17 +67,17 @@ $URL = './review_list.php';
 
  <div class="form-group"> <br><Br>
    <label for="exampleInputEmail1">글 제목</label><Br>
-   <input type="text" class="form-control" name = title placeholder="title" required>
+   <input type="text" class="form-control" name = title value="<?=$title?>">
  </div>
 
    <div class="form-group">
      <label for="exampleInputEmail1">작성자</label><Br>
-     &nbsp;<?=$_SESSION["ID"]?>
+     <input type= "hidden" class="form-control" name = "id" value="<?=$_SESSION['ID']?>"><?=$_SESSION['ID']?>
    </div>
 
    <div class="form-group">
      <label for="exampleInputPassword1">글 내용</label> <Br>
-     <textarea class="form-control" rows="10" id="comment" placeholder="contents" required></textarea>
+     <textarea class="form-control" rows="10" id="comment"  name = content value="<?=$content?>" required></textarea>
    </div>
 
 
@@ -86,6 +86,7 @@ $URL = './review_list.php';
  </form>
 
                <div align="right">
+                 <input type="hidden" name="number" value="<?=$number?>">
                  <button type = "submit" class = "btn btn-outline-success btn-lg">수정</button>
                </div>
            </div>
@@ -102,7 +103,6 @@ $URL = './review_list.php';
            <script src="../js/main.js"></script>
 </body>
 </html>
-
 
 <?php   }
 

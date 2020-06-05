@@ -73,7 +73,7 @@
                     <td width = "130" align = "center">
                     <a href = "view.php?number=<?php echo $rows['number']?>">
                     <?php echo $rows['title']?></td>
-                      <td width = "40" align = "center"><?php echo $_SESSION["ID"]?></td>
+                      <td width = "40" align = "center"><?php echo $rows['id']?></td>
                     <td width = "80" align = "center"><?php echo $rows['date']?></td>
                     <td width = "20" align = "center"><?php echo $rows['hit']?></td>
                     </tr>

@@ -102,7 +102,7 @@
 
         <tr>
                 <td class="view_id">작성자</td>
-                <td class="view_id2">&nbsp;&nbsp;<?php echo $rows['ID']?></td></td>
+                <td class="view_id2">&nbsp;&nbsp;<?php echo $rows['id']?></td></td>
                 <td class="view_hit">조회수</td>
                 <td class="view_hit2">&nbsp;&nbsp; <?php echo $rows['hit']?></td>
         </tr>
@@ -123,7 +123,9 @@
         <?php
         if(isset($_SESSION["ID"])){
       ?>
-      <button class = "view_btn1" type="button" onclick="location.href='review_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
+      <button class = "view_btn1" type="button" onclick="location.href='review_modify.php?number=<?=$number?>&id=<?=$_SESSION["ID"]?>'">수정</button>
+      <button class = "view_btn1" type="button" onclick="location.href='review_delete.php?number=<?=$number?>&id=<?=$_SESSION["ID"]?>'">삭제</button>
+    </div>
     </div>
     </div>
 
