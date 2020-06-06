@@ -5,14 +5,15 @@
 	
 	<?php
 	/***********************************************************************************
-	 * 주의) 배열 데이터 step의 index는 1부터 시작하도록 해놨습니다.
+	 * 주의) 모든 배열 데이터의 index는 1부터 시작하도록 해놨습니다.
 	 * 
 	 ***********************************************************************************/
 		class Receipe{
-			private $food_name;//one string data
-			private $food_ingredients;//one string data
+			private $food_name;
+			private $food_ingredients;
 			private $food_type;
 			private $step;//array data
+			private $step_timer;//array data
 			private $taget_dir = "uploads/";//directory to store image file
 			private $thumbnail_src;
 			private $step_count;
@@ -25,6 +26,7 @@
 			public function __construct(){
 			
 			}
+			
 			public function setInfo($food_name, $food_ingredients, $price, $consumed_time){
 				$this->food_name = $food_name;
 				$this->food_ingredients = $food_ingredients;
@@ -34,13 +36,12 @@
 				if(isset($_POST["food_type"]) && $_POST["food_type"] == true)$this->food_type = $_POST["food_type"];
 				//요리 종류 필수 체크는 프론트에서 막을수도 있음.
 				
-				
+				//각 레시피 단계에 해당하는 문자열을 배열로 저장
 				$this->step = array();
 				$i = 1;
 				$real_index = 1;
 				while($i < 11){
 					$step_id = "Step".$i;
-					
 					
 					if(isset($_POST[$step_id]) && $_POST[$step_id] == true){
 						$this->step[$real_index] = $_POST[$step_id];
@@ -48,8 +49,49 @@
 					}
 					$i++;
 				}
-				
+				//총 몇단계 레시피 인지
 				$this->step_count = count($this->step);
+				
+				
+			}
+			
+			public function setTimeInfo(){
+				$this->step_timer = array();
+				$this->step_timer[1] = 0;//php는 배열 원소에 스칼라 값을 넣을려면 먼저 이렇게 스칼라값으로 초기화 해야만 합니다 아니면 {Warning: Cannot use a scalar value as an array} 발생
+				$i = 1;
+				$real_index = 1;
+				while($i < 11){
+						
+					$name = "hour".$i;
+					
+					if(isset($_POST[$name]) && $_POST[$name] == true){
+						$tmp = ((int)($_POST[$name]))*60*60;							
+					}
+					else{
+						$tmp = 0;
+					}
+				
+					
+					$name = "min".$i;
+					if(isset($_POST[$name]) && $_POST[$name] == true){
+						$tmp += ((int)($_POST[$name]))*60;							
+					}
+					else{
+						$tmp += 0;
+					}
+				
+					
+					$name = "sec".$i;
+					if(isset($_POST[$name]) && $_POST[$name] == true){
+						$tmp += ((int)($_POST[$name]));							
+					}
+					else{
+						$tmp += 0;
+					}
+					$this->step_timer[$real_index] = $tmp;
+					$real_index++;
+					$i++;
+				}
 			}
 
 			public function showInfo(){
@@ -66,11 +108,9 @@
 				
 				for($i = 1; $i <= count($this->step); $i++){
 					echo "단계".$i.": ".$this->step[$i]."<br>";
-					
+					echo $this->step_timer[$i]."초 소요"."<br>";
 				}
-				 
-				
-				 
+	 
 			}
 			
 			public function uploadthumbnail(){
@@ -103,7 +143,9 @@
 		
 		$newReceipe = new Receipe();
 		$newReceipe->setInfo($_POST["food_name"], $_POST["food_ingredients"], $_POST["price"], $_POST["time"]);
+		$newReceipe->setTimeinfo();
 		$newReceipe->showInfo();
+	
 		//$newReceipe->uploadthumbnail();
 		
 		
