@@ -1,5 +1,8 @@
   
 <?php
+	session_start();
+	require_once("../lib/MYDB.php");
+	$pdo = db_connect();
     if(!isset($_SESSION["ID"]))
 	{
 ?>
