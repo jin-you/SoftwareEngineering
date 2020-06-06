@@ -44,6 +44,14 @@
 		var del_txt_node;
 		var div;
 		var div_name;
+		var time_div;
+		var time_hour;
+		var time_min;
+		var time_sec;
+		var time_div_tmp;
+		var time_span_tmp;
+		var string_tmp;
+
 
 		tmp = "Step " + (stepcount + 1);
 		tmp_id = "Step" + (stepcount + 1);
@@ -54,6 +62,7 @@
 		new_obj.setAttribute('class', 'form-control');
 		new_obj.setAttribute('id', tmp);
 		new_obj.setAttribute('rows', '3');
+		//텍스트 입력 태그 생성및 설정
 
 		del_btn = document.createElement('button');
 		del_btn.setAttribute('class', 'btn btn-danger btn-space');
@@ -61,20 +70,87 @@
 		del_btn.setAttribute('onclick', 'deleteStep(id)');
 		del_txt_node = document.createTextNode('취소');
 		del_btn.appendChild(del_txt_node);
-
+		//취소 태그 생성및 설정
+		
+		time_div = document.createElement('div');
+		time_div.setAttribute('class', 'input-group input-group-sm mb-3');
+		
+		/////////////////////////////////////////////////////////////
+		time_hour = document.createElement('input');
+		time_hour.setAttribute('type', 'text');
+		time_hour.setAttribute('class', 'form-control');
+		time_hour.setAttribute('name', 'hour' + (stepcount + 1));
+		time_hour.setAttribute('placeholder', '0');
+		time_hour.setAttribute('aria-describedby','basic-addon2');
+				
+		time_div_tmp = document.createElement('div');
+		time_div_tmp.setAttribute('class', 'input-group-append');
+		time_span_tmp = document.createElement('span');
+		time_span_tmp.setAttribute('class', 'input-group-text');
+		time_span_tmp.setAttribute('id', 'basic-addon2');
+		string_tmp = document.createTextNode('시');
+		time_span_tmp.appendChild(string_tmp);
+		time_div_tmp.appendChild(time_span_tmp);
+		
+		time_div.appendChild(time_hour);
+		time_div.appendChild(time_div_tmp);	
+		/////////////////////////////////////////////////////////////
+		
+		/////////////////////////////////////////////////////////////
+		time_min = document.createElement('input');
+		time_min.setAttribute('type', 'text');
+		time_min.setAttribute('class', 'form-control');
+		time_min.setAttribute('name', 'min' + (stepcount + 1));
+		time_min.setAttribute('placeholder', '0');
+		time_min.setAttribute('aria-describedby','basic-addon2');
+		
+		time_div_tmp = document.createElement('div');
+		time_div_tmp.setAttribute('class', 'input-group-append');
+		time_span_tmp = document.createElement('span');
+		time_span_tmp.setAttribute('class', 'input-group-text');
+		time_span_tmp.setAttribute('id', 'basic-addon2');
+		string_tmp = document.createTextNode('분');
+		time_span_tmp.appendChild(string_tmp);
+		time_div_tmp.appendChild(time_span_tmp);
+		
+		time_div.appendChild(time_min);
+		time_div.appendChild(time_div_tmp);
+		
+		/////////////////////////////////////////////////////////////
+		
+		/////////////////////////////////////////////////////////////
+		time_sec = document.createElement('input');
+		time_sec.setAttribute('type', 'text');
+		time_sec.setAttribute('class', 'form-control');
+		time_sec.setAttribute('name', 'sec' + (stepcount + 1));
+		time_sec.setAttribute('placeholder', '0');
+		time_sec.setAttribute('aria-describedby','basic-addon2');
+		
+		time_div_tmp = document.createElement('div');
+		time_div_tmp.setAttribute('class', 'input-group-append');
+		time_span_tmp = document.createElement('span');
+		time_span_tmp.setAttribute('class', 'input-group-text');
+		time_span_tmp.setAttribute('id', 'basic-addon2');
+		string_tmp = document.createTextNode('초');
+		time_span_tmp.appendChild(string_tmp);
+		time_div_tmp.appendChild(time_span_tmp);
+		
+		time_div.appendChild(time_sec);
+		time_div.appendChild(time_div_tmp);
+		/////////////////////////////////////////////////////////////
+				
+		//div 태그안에 입력, 취소태그 넣기
 		div = document.createElement('div');
 		div.setAttribute('name', div_name);
 		div.setAttribute('id', div_name);
 		div.appendChild(new_obj);
+		div.appendChild(time_div);
 		div.appendChild(del_btn);
 		div.appendChild(document.createElement('hr'));
 		div.appendChild(document.createElement('p'));
 
 		before_obj = document.getElementById("step");
 		before_obj.appendChild(div);
-		
-		
-		
 		
 		stepcount++;
 	}
@@ -113,7 +189,7 @@
 				<input type = 'radio' name = 'time' value= '20'/> 10분~30분
 
 				<input type = 'radio' name = 'time' value= '45'/> 30분~1시간
-				<input type = 'radio' name = 'time' value= '100'/> 1시간 이상
+				<input type = 'radio' name = 'time' value= '60'/> 1시간 이상
 				<br/><br/>
 			</div>
 			<hr>
@@ -156,6 +232,7 @@
 			<div id="step" style="float:none; margin:0 auto">
 				단계별 조리법이 추가되는 div<br>
 				조리법, step누를때마다 단계 추가, 삭제버튼도 필요<br>	
+				
 			</div>
 				
 				<button type="button" id="add_step_btn" style="height:50px" class="btn btn-primary btn-lg btn-block" onclick="addStep(this.id)">요리 과정 추가</button>
@@ -163,11 +240,6 @@
 				<button type="submit" id="submit" class="btn btn-success btn-lg btn-block" style="height:50px">레시피 올리기</button>						
 		</div>
 	</form>
-
-
-	<!--자바 스크립트 파일은 body 끝나는 가장 마지막 부분에 넣어줘야함.
-	제이쿼리 먼저 인클루드하고 부트스트랩 인클루드해야함
-	부트스트랩이 제이쿼리 기반으로 만들어졌기 때문-->
 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
