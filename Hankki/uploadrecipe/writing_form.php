@@ -8,31 +8,7 @@
 <script>
 	var stepcount = 0;
 	var receipe = new Array();
-	/*
-	 $(function() {
-        $("#add_step_btn").on("click", function() {
-            $("#step").append("<input type='text' placeholder='Text input'>");
-        });
-    });
-	*/
-	/*
-	window.onload=function(){
-		document.getElementById("submit1").onclick=makeData;
-	}
-
-	function makeData(){
-
-		var i;
-		var tmp_obj;
-		var tmp_id;
-		for(i = 0; i<stepcount; i++){
-			tmp_id = "Step" + i;
-			tmp_obj = document.getElementById(tmp_id);
-			receipe[i] = tmp_obj.value.split("\n");
-		}
-		alert(receipe);
-	}
-*/
+	
 	function addStep(current){
 		var new_obj;
 		var tmp_id;
@@ -218,15 +194,15 @@
 						<label class="form-check-label" for="inlineCheckbox1">양식</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="중식" name="food_type">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="중식" name="food_type">
 						<label class="form-check-label" for="inlineCheckbox2">중식</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="한식" name="food_type">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="한식" name="food_type">
 						<label class="form-check-label" for="inlineCheckbox3">한식</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="한식" name="food_type">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="한식" name="food_type">
 						<label class="form-check-label" for="inlineCheckbox3">일식</label>
 					</div>
 				</div>
