@@ -15,8 +15,9 @@
         });
     });
 	*/
+	/*
 	window.onload=function(){
-		document.getElementById("submit").onclick=makeData;
+		document.getElementById("submit1").onclick=makeData;
 	}
 
 	function makeData(){
@@ -31,7 +32,7 @@
 		}
 		alert(receipe);
 	}
-
+*/
 	function addStep(current){
 		var new_obj;
 		var tmp_id;
@@ -160,14 +161,17 @@
 		var target = document.getElementById(tmp_obj);
 		target.remove();
 	}
+	
+	
+
+
 </script>
-
-
+<script type="text/javascript" src="validation.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="request.php" method="post" enctype="multipart/form-data">
+	<form action="request.php" method="post" name="receipe_form" enctype="multipart/form-data">
 		<div class="container" style="width:50%;">	
 			<div style="width:100%;">
 			<img src="default.jpg" alt="..." class="img-thumbnail">
@@ -175,12 +179,12 @@
 			<hr>
 			
 			<div class="container" style="width:50%;">
-				<input class="form-control form-control-lg" type="text" placeholder="음식 이름" name="food_name">		
+				<input class="form-control form-control-lg" type="text" placeholder="음식 이름" name="food_name", id="food_name">		
 			</div>
 			<hr>
 					
 			<div class="container" style="width:50%;">
-				<textarea class="form-control" name="food_ingredients" rows="5">음식 재료, 소요시간 필요</textarea>
+				<textarea class="form-control" name="food_ingredients" id="food_ingredients" rows="5" placeholder="음식 재료"></textarea>
 			</div>
 			<hr>
 			<div class="container" style="width:50%;">				
@@ -236,8 +240,9 @@
 			</div>
 				
 				<button type="button" id="add_step_btn" style="height:50px" class="btn btn-primary btn-lg btn-block" onclick="addStep(this.id)">요리 과정 추가</button>
-				<br>	
-				<button type="submit" id="submit" class="btn btn-success btn-lg btn-block" style="height:50px">레시피 올리기</button>						
+				<br>					
+				<input type="submit" name="sub" class="btn btn-success btn-lg btn-block" style="height:50px" onclick="return CheckValidation()" value="레시피 올리기"/>
+				<!--type이랑 id이름 같으면 onclick이 안먹힙니다. 왜인지는 모르겟어여... -->
 		</div>
 	</form>
 
