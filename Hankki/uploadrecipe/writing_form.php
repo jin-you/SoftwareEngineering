@@ -57,6 +57,7 @@
 		time_hour.setAttribute('type', 'text');
 		time_hour.setAttribute('class', 'form-control');
 		time_hour.setAttribute('name', 'hour' + (stepcount + 1));
+		time_hour.setAttribute('value', '0');
 		time_hour.setAttribute('placeholder', '0');
 		time_hour.setAttribute('aria-describedby','basic-addon2');
 				
@@ -78,6 +79,7 @@
 		time_min.setAttribute('type', 'text');
 		time_min.setAttribute('class', 'form-control');
 		time_min.setAttribute('name', 'min' + (stepcount + 1));
+		time_min.setAttribute('value', '0');
 		time_min.setAttribute('placeholder', '0');
 		time_min.setAttribute('aria-describedby','basic-addon2');
 		
@@ -100,6 +102,7 @@
 		time_sec.setAttribute('type', 'text');
 		time_sec.setAttribute('class', 'form-control');
 		time_sec.setAttribute('name', 'sec' + (stepcount + 1));
+		time_sec.setAttribute('value' , '0');
 		time_sec.setAttribute('placeholder', '0');
 		time_sec.setAttribute('aria-describedby','basic-addon2');
 		
