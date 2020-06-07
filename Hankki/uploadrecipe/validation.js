@@ -15,12 +15,17 @@
  * 	체크 박스
  * 		1.체크를 안 한 경우
  * 
- * 	레시피(06/07 작업 중)
+ * 	레시피
  * 		1.아무것도 입력 안한경우
  * 		2.공백만 입력 한 경우
  * 		3.시/분/초에 문자가 들어간 경우
  *  
  *********************************************************************/
+const kor_eng = /^[a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+const kor_eng_num = /^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+const only_number = /^[0-9]*$/;
+const only_space = /^\s+$/;
+
 function CheckValidation(){
 
 	var i = 1;//제어 변수
@@ -31,13 +36,6 @@ function CheckValidation(){
 	var descent_tag;
 	var descent_tag2;
 	var tmp;
-	
-	const kor_eng = /^[a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-	const kor_eng_num = /^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-	const only_number = /^[0-9]/;
-	const only_space = /^\s+$/;
-	
-
 	
 	if(title.value == "" || title.value.length == 0 || only_space.test(title.value)){
 		alert("요리 제목을 입력 해 주세요!");
@@ -139,8 +137,49 @@ function CheckValidation(){
 	}
 
 
-	return false;
+	return true;
 	
 }
 
 
+function checkReview(){
+	var title = document.getElementById('title');
+	var text = document.getElementById('comment');
+	
+	if(title.value == "" || title.value.length == 0 || only_space.test(title.value)){
+		alert("제목을 입력 해 주세요!");
+		title.select();
+		title.focus();
+		return false;
+	}
+	if(!kor_eng_num.test(title.value)){
+		alert("제목에 특수문자를 넣을 수 없습니다!");
+		title.select();
+		title.focus();
+		return false;
+	}
+	
+	if(title.value.length > 30){
+		alert("제목은 30자를 넘을 수 없습니다!");
+		title.select();
+		title.focus();
+		return false;
+	}
+	
+	if(text.value == "" || text.value.length == 0 || only_space.test(text.value)){
+		alert("내용을 입력 해 주세요!");
+		text.select();
+		text.focus();
+		return false;
+	}
+	
+	if(text.value.length > 300){
+		alert("내용은 300자를 넘길 수 없습니다!");
+		text.select();
+		text.focus();
+		return false;
+	}
+	
+	
+	return true;
+}

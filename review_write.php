@@ -34,6 +34,7 @@ session_start();
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../uploadrecipe/validation.js"></script>
  </head>
 
 
@@ -50,12 +51,12 @@ session_start();
 
   <div class="form-group"> <br><Br>
     <label for="exampleInputEmail1">글 제목</label><Br>
-    <input type="text" class="form-control" name = title placeholder="title" required>
+    <input type="text" class="form-control" id="title" name = "title" placeholder="title" required>
   </div>
 
     <div class="form-group">
       <label for="exampleInputEmail1">작성자</label><Br>
-      <input type="text" class="form-control" name = id placeholder=<?=$_SESSION["ID"]?>>
+      <input type="text" class="form-control" id="id" name = "id" placeholder=<?=$_SESSION["ID"]?>>
     </div>
 
     <div class="form-group">
@@ -69,7 +70,7 @@ session_start();
   </form>
 
 								<div align="right">
-									<button type = "submit" class = "btn btn-outline-success btn-lg">등록</button>
+									<button type = "submit" class = "btn btn-outline-success btn-lg" onclick="return checkReview()">등록</button>
 									<button type="button" onclick="location.href='review_list.php'" class="btn btn-outline-primary btn-lg">목록으로</button>
 								</div>
 						</div>
