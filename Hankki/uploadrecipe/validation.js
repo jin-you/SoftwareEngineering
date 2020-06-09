@@ -29,14 +29,15 @@ const only_space = /^\s+$/;
 function CheckValidation(){
 
 	var i = 1;//제어 변수
-	var title = document.getElementById("food_name");
-	var ingredients = document.getElementById("food_ingredients");
+	var title = document.getElementById("title");
+	var ingredients = document.getElementById("ingredients");
+	var simple_description = document.getElementById("content");
 	var parent_div = document.getElementById("step");
 	var child_tag = parent_div.childNodes; 
 	var descent_tag;
 	var descent_tag2;
 	var tmp;
-	
+
 	if(title.value == "" || title.value.length == 0 || only_space.test(title.value)){
 		alert("요리 제목을 입력 해 주세요!");
 		title.select();
@@ -58,6 +59,18 @@ function CheckValidation(){
 		return false;
 	}
 	
+	if(simple_description.value ==""|| simple_description.value.length==0||only_space.test(simple_description.value)){
+		alert("레시피에 대한 간단한 설명을 입력 해 주세요!");
+		simple_description.select();
+		simple_description.focus();
+		return false;
+	}
+	if(!kor_eng_num.test(simple_description.value)){
+		alert("설명은 한글, 영문, 숫자만 입력 해 주세요!")
+		simple_description.select();
+		simple_description.focus();
+		return false;
+	}
 	
 	if(ingredients.value == "" || ingredients.value.length == 0 || only_space.test(ingredients.value)){
 		alert("음식 재료를 입력 해 주세요!");
@@ -79,23 +92,28 @@ function CheckValidation(){
 		ingredients.focus();
 		return false;
 	}
-	
-	if(receipe_form.time[0].checked == false && receipe_form.time[1].checked  == false && receipe_form.time[2].checked  == false && receipe_form.time[3].checked  == false){
+	/*
+	if(board_form.time[0].checked == false && board_form.time[1].checked  == false && board_form.time[2].checked  == false && board_form.time[3].checked  == false){
 		alert("총 요리 소요 시간을 선택 해 주세요!");
 		return false;	
 	}
-	
-	if(receipe_form.price[0].checked == false && receipe_form.price[1].checked == false && receipe_form.price[2].checked == false && receipe_form.price[3].checked == false){
+	*/
+	if(board_form.price[0].checked == false && board_form.price[1].checked == false && board_form.price[2].checked == false && board_form.price[3].checked == false){
 		alert("레시피 가격대를 선택 해 주세요!");
 		return false;
 	}
-
-	if(receipe_form.food_type[0].checked == false && receipe_form.food_type[1].checked == false && receipe_form.food_type[2].checked == false && receipe_form.food_type[3].checked == false){
+	
+	
+/*
+	if(board_form.food_type[0].checked == false && board_form.food_type[1].checked == false && board_form.food_type[2].checked == false && board_form.food_type[3].checked == false){
 		alert("음식 유형(양식/ 중식/ 한식/ 일식)을 선택 해 주세요!");
 		return false;
 	}
-	
-	
+	*/
+	if(child_tag.length == 0){
+		alert("최소한 한번 이상의 요리과정이 필요해요!");
+		return false;
+	}
 	for(var i = 0; i < child_tag.length; i++){//각 레시피 단계가 있는 div tag 찾기
 		if(child_tag[i].nodeName != "DIV")continue;
 			
